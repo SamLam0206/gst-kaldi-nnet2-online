@@ -145,7 +145,7 @@ struct _NBestResult {
   std::vector<WordInHypothesis> words;
   std::vector<PhoneAlignmentInfo> phone_alignment;
   std::vector<WordAlignmentInfo> word_alignment;
-  std::vector<LatticeWeight> likelihoods;
+  std::vector<Lattice::Arc::Weight> likelihoods;
 };
 
 struct _FullFinalResult {
