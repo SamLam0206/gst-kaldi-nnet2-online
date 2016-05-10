@@ -1060,7 +1060,7 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
 	  //catch(...) { 
 		//  test = 99; 
 	  //}
-	  json_object_set_new(nbest_result_json_object, "likelihoods", json_real(nbest_result.likelihoods[0].Value1()));
+	  json_object_set_new(nbest_result_json_object, "likelihoods", json_real(nbest_result.likelihoods[1].Value1()));
       json_array_append( nbest_json_arr, nbest_result_json_object );
       if (nbest_result.phone_alignment.size() > 0) {
         if (strcmp(filter->phone_syms_filename, "") == 0) {
