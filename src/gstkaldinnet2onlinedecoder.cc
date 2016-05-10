@@ -983,10 +983,11 @@ static std::vector<NBestResult> gst_kaldinnet2onlinedecoder_nbest_results(
     nbest_result.likelihood = -(weight.Value1() + weight.Value2());
 
 	// get word-level likelihood in 'likelihoods'
-	std::vector<LatticeWeight> likelihoods;
+	LatticeWeight likelihoods;
 	Lattice::StateId cur_state = nbest_lats[i].Start();
-	for (fst::ArcIterator<Lattice> aiter(nbest_lats[i], 1); cur_state == 4; cur_state = aiter.Value().nextstate) {
-		nbest_result.likelihoods.push_back(aiter.Value().weight);
+	for (fst::ArcIterator<Lattice> aiter(nbest_lats[i], cur_state); cur_state == 4; cur_state = aiter.Value().nextstate) {
+		likelihoods = aiter.Value().weight;
+		nbest_result.likelihoods.push_back(likelihoods);
 	}
 	//nbest_result.likelihoods = likelihoods;
     nbest_result.num_frames = alignment.size();
