@@ -1048,19 +1048,15 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
       json_object_set_new(nbest_result_json_object, "transcript",
                           json_string(gst_kaldinnet2onlinedecoder_words_in_hyp_to_string(filter, nbest_result.words).c_str()));
       json_object_set_new(nbest_result_json_object, "likelihood",  json_real(nbest_result.likelihood));
-	  //double test;
-	  //try {
-		//  if (nbest_result.likelihoods.empty()) {
-		//	  test = 0.0;
-		//  }
-		//  else { 
-		//	  test = 1.0; 
-		//  }
-	  //}
-	  //catch(...) { 
-		//  test = 99; 
-	  //}
-	  json_object_set_new(nbest_result_json_object, "likelihoods", json_real(nbest_result.likelihoods[1].Value1()));
+	  std::ostringstream ss;
+	  std::string s;
+	  for (int i = 0; i < nbest_result.likelihoods.size(); i++) {
+		  ss << nbest_result.likelihoods[i].Value1();
+		  ss << " ";
+	  }
+	  s = ss.str();
+	  json_object_set_new(nbest_result_json_object, "wgw", json_string(s.c_str()));
+	  //json_object_set_new(nbest_result_json_object, "waw", );
       json_array_append( nbest_json_arr, nbest_result_json_object );
       if (nbest_result.phone_alignment.size() > 0) {
         if (strcmp(filter->phone_syms_filename, "") == 0) {
