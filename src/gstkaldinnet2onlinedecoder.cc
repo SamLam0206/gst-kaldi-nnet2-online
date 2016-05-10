@@ -979,16 +979,16 @@ static std::vector<NBestResult> gst_kaldinnet2onlinedecoder_nbest_results(
     LatticeWeight weight;
     GetLinearSymbolSequence(nbest_lats[i], &alignment, &words, &weight);
 
+    NBestResult nbest_result;
+    nbest_result.likelihood = -(weight.Value1() + weight.Value2());
+
 	// get word-level likelihood in 'likelihoods'
 	std::vector<LatticeWeight> likelihoods;
 	Lattice::StateId cur_state = nbest_lats[i].Start();
 	for (fst::ArcIterator<Lattice> aiter(nbest_lats[i], cur_state); cur_state == 4; cur_state = aiter.Value().nextstate) {
-		likelihoods.push_back(aiter.Value().weight);
+		nbest_result.likelihoods.push_back(aiter.Value().weight);
 	}
-
-    NBestResult nbest_result;
-    nbest_result.likelihood = -(weight.Value1() + weight.Value2());
-	nbest_result.likelihoods = likelihoods;
+	//nbest_result.likelihoods = likelihoods;
     nbest_result.num_frames = alignment.size();
     for (size_t j=0; j < words.size(); j++) {
       WordInHypothesis word_in_hyp;
