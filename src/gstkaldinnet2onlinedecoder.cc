@@ -1047,6 +1047,8 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
       json_object_set_new(nbest_result_json_object, "likelihood",  json_real(nbest_result.likelihood));
 	  std::ostringstream wgws;
 	  std::ostringstream waws;
+	  float total_gw = 0.0;
+	  float total_aw = 0.0;
 	  for (int i = 0; i < nbest_result.likelihoods.size(); i++) {
 		  if (i > 0) {
 			  wgws << " ";
@@ -1054,7 +1056,11 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
 		  }
 		  wgws << nbest_result.likelihoods[i].Value1();
 		  waws << nbest_result.likelihoods[i].Value2();
+		  total_gw += nbest_result.likelihoods[i].Value1();
+		  total_aw += nbest_result.likelihoods[i].Value2();
 	  }
+	  wgws << " " << total_gw;
+	  waws << " " << total_aw;
 	  json_object_set_new(nbest_result_json_object, "wgw", json_string(wgws.str().c_str()));
 	  json_object_set_new(nbest_result_json_object, "waw", json_string(waws.str().c_str()));
       json_array_append( nbest_json_arr, nbest_result_json_object );
