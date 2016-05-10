@@ -1041,7 +1041,7 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
 		  test = nbest_result.likelihoods[1].Value1();
 	  }
 	  catch(...) { 
-		  test = 0; 
+		  test = 0.0; 
 	  }
 	  json_object_set_new(nbest_result_json_object, "likelihoods", json_real(test));
       json_array_append( nbest_json_arr, nbest_result_json_object );
