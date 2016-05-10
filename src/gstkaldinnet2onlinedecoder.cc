@@ -1038,10 +1038,12 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
       json_object_set_new(nbest_result_json_object, "likelihood",  json_real(nbest_result.likelihood));
 	  double test;
 	  try {
-		  test = nbest_result.likelihoods[1].Value1();
+		  if (nbest_result.likelihoods.empty()) {
+			  test = 0.0;
+		  }
 	  }
 	  catch(...) { 
-		  test = 0.0; 
+		  test = 1.0; 
 	  }
 	  json_object_set_new(nbest_result_json_object, "likelihoods", json_real(test));
       json_array_append( nbest_json_arr, nbest_result_json_object );
