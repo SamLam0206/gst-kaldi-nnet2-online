@@ -990,7 +990,7 @@ static std::vector<NBestResult> gst_kaldinnet2onlinedecoder_nbest_results(
 		if (w != LatticeWeight::Zero()) {
 			break;
 		} else {
-			fst::ArcIterator<fst::Fst<kaldi::LatticeArc>> aiter(nbest_lats[i], cur_state);
+			fst::ArcIterator<fst::Fst<kaldi::LatticeArc> > aiter(nbest_lats[i], cur_state);
 			const kaldi::LatticeArc &arc = aiter.Value();
 			nbest_result.likelihoods.push_back(arc.weight);
 			cur_state = arc.nextstate;
