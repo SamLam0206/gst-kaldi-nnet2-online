@@ -1048,15 +1048,18 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
       json_object_set_new(nbest_result_json_object, "transcript",
                           json_string(gst_kaldinnet2onlinedecoder_words_in_hyp_to_string(filter, nbest_result.words).c_str()));
       json_object_set_new(nbest_result_json_object, "likelihood",  json_real(nbest_result.likelihood));
-	  std::ostringstream ss;
-	  std::string s;
+	  std::ostringstream wgws;
+	  std::ostringstream waws;
 	  for (int i = 0; i < nbest_result.likelihoods.size(); i++) {
-		  ss << nbest_result.likelihoods[i].Value1();
-		  ss << " ";
+		  if (i > 0) {
+			  wgws << " ";
+			  waws << " ";
+		  }
+		  wgws << nbest_result.likelihoods[i].Value1();
+		  waws << nbest_result.likelihoods[i].Value2();
 	  }
-	  s = ss.str();
-	  json_object_set_new(nbest_result_json_object, "wgw", json_string(s.c_str()));
-	  //json_object_set_new(nbest_result_json_object, "waw", );
+	  json_object_set_new(nbest_result_json_object, "wgw", json_string(wgws.str().c_str()));
+	  json_object_set_new(nbest_result_json_object, "waw", json_string(waws.str().c_str()));
       json_array_append( nbest_json_arr, nbest_result_json_object );
       if (nbest_result.phone_alignment.size() > 0) {
         if (strcmp(filter->phone_syms_filename, "") == 0) {
