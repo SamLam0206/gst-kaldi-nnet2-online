@@ -991,15 +991,12 @@ static std::vector<NBestResult> gst_kaldinnet2onlinedecoder_nbest_results(
 		} else {
 			fst::ArcIterator<fst::Fst<kaldi::LatticeArc> > aiter(nbest_lats[i], cur_state);
 			const kaldi::LatticeArc &arc = aiter.Value();
-			nbest_result.likelihoods.push_back(arc.weight);
+			if (arc.weight != LatticeWeight::One()) {
+				nbest_result.likelihoods.push_back(arc.weight);
+			}
 			cur_state = arc.nextstate;
 		}
 	}
-	//Lattice::StateId cur_state = nbest_lats[i].Start();
-	//for (fst::ArcIterator<Lattice> aiter(nbest_lats[i], cur_state); cur_state > 4; //cur_state = aiter.Value().nextstate) {
-	//	likelihoods = aiter.Value().weight;
-	//	nbest_result.likelihoods.push_back(likelihoods);
-	//}
 
     nbest_result.num_frames = alignment.size();
     for (size_t j=0; j < words.size(); j++) {
