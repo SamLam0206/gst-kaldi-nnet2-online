@@ -145,6 +145,7 @@ struct _NBestResult {
   std::vector<WordInHypothesis> words;
   std::vector<PhoneAlignmentInfo> phone_alignment;
   std::vector<WordAlignmentInfo> word_alignment;
+  std::vector<LatticeWeight> likelihoods;
 };
 
 struct _FullFinalResult {
@@ -978,8 +979,16 @@ static std::vector<NBestResult> gst_kaldinnet2onlinedecoder_nbest_results(
     LatticeWeight weight;
     GetLinearSymbolSequence(nbest_lats[i], &alignment, &words, &weight);
 
+	// get word-level likelihood in 'likelihoods'
+	std::vector<LatticeWeight> likelihoods;
+	Lattice::StateId cur_state = nbest_lats[i].Start();
+	for (fst::ArcIterator<Lattice> aiter(nbest_lats[i], cur_state); nbest_lats[i].Final(cur_state) != LatticeWeight::Zero(); cur_state = aiter.Value().nextstate) {
+		likelihoods.push_back(aiter.Value().weight);
+	}
+
     NBestResult nbest_result;
     nbest_result.likelihood = -(weight.Value1() + weight.Value2());
+	nbest_result.likelihoods = likelihoods;
     nbest_result.num_frames = alignment.size();
     for (size_t j=0; j < words.size(); j++) {
       WordInHypothesis word_in_hyp;
@@ -1027,6 +1036,7 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
       json_object_set_new(nbest_result_json_object, "transcript",
                           json_string(gst_kaldinnet2onlinedecoder_words_in_hyp_to_string(filter, nbest_result.words).c_str()));
       json_object_set_new(nbest_result_json_object, "likelihood",  json_real(nbest_result.likelihood));
+	  json_object_set_new(nbest_result_json_object, "likelihoods", json_string(nbest_result.likelihoods[0].Value1));
       json_array_append( nbest_json_arr, nbest_result_json_object );
       if (nbest_result.phone_alignment.size() > 0) {
         if (strcmp(filter->phone_syms_filename, "") == 0) {

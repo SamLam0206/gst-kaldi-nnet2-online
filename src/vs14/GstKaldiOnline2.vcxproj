@@ -29,7 +29,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <UseIntelMKL>Composer</UseIntelMKL>
+    <UseIntelMKL>No</UseIntelMKL>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -37,14 +37,14 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseIntelMKL>Composer</UseIntelMKL>
+    <UseIntelMKL>No</UseIntelMKL>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <UseIntelMKL>Composer</UseIntelMKL>
+    <UseIntelMKL>No</UseIntelMKL>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -52,7 +52,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseIntelMKL>Composer</UseIntelMKL>
+    <UseIntelMKL>No</UseIntelMKL>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -60,49 +60,49 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(GSTREAMER_1_0_ROOT_X86)share\vs\2010\libs\gstreamer-1.0.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\kaldiwin_win32.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\openfstwin_debug_win32.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\variables.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\kaldiwin_win32.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\openfstwin_debug_win32.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\variables.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(GSTREAMER_1_0_ROOT_X86_64)share\vs\2010\libs\gstreamer-1.0.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\kaldiwin.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\openfstwin_debug.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\variables.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\kaldiwin.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\openfstwin_debug.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\variables.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(GSTREAMER_1_0_ROOT_X86)share\vs\2010\libs\gstreamer-1.0.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\kaldiwin_win32.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\openfstwin_release_win32.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\variables.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\kaldiwin_win32.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\openfstwin_release_win32.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\variables.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(GSTREAMER_1_0_ROOT_X86_64)share\vs\2010\libs\gstreamer-1.0.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\kaldiwin.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\openfstwin_release.props" />
-    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_MKL\kaldiwin\variables.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\kaldiwin.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\openfstwin_release.props" />
+    <Import Project="..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\kaldiwin\variables.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>..\..\..\jansson-2.7\build_win32\lib\Debug;..\..\..\kaldi\kaldiwin_vs2015_MKL\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\..\jansson-2.7\build_win32\lib\Debug;..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\Debug;$(LibraryPath)</LibraryPath>
     <IncludePath>..\..\..\kaldi\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>..\..\..\jansson-2.7\build\lib\Debug;..\..\..\kaldi\kaldiwin_vs2015_MKL\x64\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\..\jansson-2.7\build\lib\Debug;..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\x64\Debug;$(LibraryPath)</LibraryPath>
     <IncludePath>..\..\..\kaldi\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>..\..\..\jansson-2.7\build_win32\lib\MinSizeRel;..\..\..\kaldi\kaldiwin_vs2015_MKL\Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\..\jansson-2.7\build_win32\lib\MinSizeRel;..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\Release;$(LibraryPath)</LibraryPath>
     <IncludePath>..\..\..\kaldi\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>..\..\..\jansson-2.7\build\lib\MinSizeRel;..\..\..\kaldi\kaldiwin_vs2015_MKL\x64\Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\..\jansson-2.7\build\lib\MinSizeRel;..\..\..\kaldi\kaldiwin_vs2015_OPENBLAS\x64\Release;$(LibraryPath)</LibraryPath>
     <IncludePath>..\..\..\kaldi\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -111,7 +111,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;HAVE_MKL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\jansson-2.7\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -126,7 +126,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;HAVE_MKL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\jansson-2.7\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -143,7 +143,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;HAVE_MKL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\jansson-2.7\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -163,7 +163,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;HAVE_MKL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;GSTKALDIONLINE2_EXPORTS;HAVE_STRUCT_TIMESPEC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\..\..\jansson-2.7\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
