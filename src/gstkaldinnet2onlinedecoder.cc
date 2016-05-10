@@ -1045,24 +1045,24 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
       json_object_set_new(nbest_result_json_object, "transcript",
                           json_string(gst_kaldinnet2onlinedecoder_words_in_hyp_to_string(filter, nbest_result.words).c_str()));
       json_object_set_new(nbest_result_json_object, "likelihood",  json_real(nbest_result.likelihood));
-	  std::ostringstream wgws;
-	  std::ostringstream waws;
+	  std::ostringstream gwws;
+	  std::ostringstream awws;
 	  float total_gw = 0.0;
 	  float total_aw = 0.0;
 	  for (int i = 0; i < nbest_result.likelihoods.size(); i++) {
 		  if (i > 0) {
-			  wgws << " ";
-			  waws << " ";
+			  gwws << " ";
+			  awws << " ";
 		  }
-		  wgws << nbest_result.likelihoods[i].Value1();
-		  waws << nbest_result.likelihoods[i].Value2();
+		  gwws << nbest_result.likelihoods[i].Value1();
+		  awws << nbest_result.likelihoods[i].Value2();
 		  total_gw += nbest_result.likelihoods[i].Value1();
 		  total_aw += nbest_result.likelihoods[i].Value2();
 	  }
-	  wgws << " " << total_gw;
-	  waws << " " << total_aw;
-	  json_object_set_new(nbest_result_json_object, "wgw", json_string(wgws.str().c_str()));
-	  json_object_set_new(nbest_result_json_object, "waw", json_string(waws.str().c_str()));
+	  gwws << " " << total_gw;
+	  awws << " " << total_aw;
+	  json_object_set_new(nbest_result_json_object, "gww", json_string(gwws.str().c_str()));
+	  json_object_set_new(nbest_result_json_object, "aww", json_string(awws.str().c_str()));
       json_array_append( nbest_json_arr, nbest_result_json_object );
       if (nbest_result.phone_alignment.size() > 0) {
         if (strcmp(filter->phone_syms_filename, "") == 0) {
