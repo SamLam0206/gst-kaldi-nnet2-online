@@ -970,6 +970,7 @@ static std::vector<string> gst_kaldinnet2onlinedecoder_weights_to_string(const s
 	}
 	ws.push_back(gwws.str());
 	ws.push_back(awws.str());
+	return ws;
 }
 
 static std::vector<NBestResult> gst_kaldinnet2onlinedecoder_nbest_results(
