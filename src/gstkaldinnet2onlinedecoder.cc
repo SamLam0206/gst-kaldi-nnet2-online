@@ -956,6 +956,22 @@ static std::string gst_kaldinnet2onlinedecoder_words_in_hyp_to_string(
   return gst_kaldinnet2onlinedecoder_words_to_string(filter, word_ids);
 }
 
+static std::vector<string> gst_kaldinnet2onlinedecoder_weights_to_string(const std::vector<LatticeWeight> likelihoods) {
+	std::vector<string> ws;
+	std::ostringstream gwws;
+	std::ostringstream awws;
+	for (int i = 0; i < likelihoods.size(); i++) {
+		if (i > 0) {
+			gwws << " ";
+			awws << " ";
+		}
+		gwws << likelihoods[i].Value1();
+		awws << likelihoods[i].Value2();
+	}
+	ws.push_back(gwws.str());
+	ws.push_back(awws.str());
+}
+
 static std::vector<NBestResult> gst_kaldinnet2onlinedecoder_nbest_results(
     Gstkaldinnet2onlinedecoder * filter, CompactLattice &clat) {
 
@@ -1045,24 +1061,19 @@ static std::string gst_kaldinnet2onlinedecoder_full_final_result_to_json(
       json_object_set_new(nbest_result_json_object, "transcript",
                           json_string(gst_kaldinnet2onlinedecoder_words_in_hyp_to_string(filter, nbest_result.words).c_str()));
       json_object_set_new(nbest_result_json_object, "likelihood",  json_real(nbest_result.likelihood));
-	  std::ostringstream gwws;
-	  std::ostringstream awws;
-	  float total_gw = 0.0;
-	  float total_aw = 0.0;
-	  for (int i = 0; i < nbest_result.likelihoods.size(); i++) {
-		  if (i > 0) {
-			  gwws << " ";
-			  awws << " ";
-		  }
-		  gwws << nbest_result.likelihoods[i].Value1();
-		  awws << nbest_result.likelihoods[i].Value2();
-		  total_gw += nbest_result.likelihoods[i].Value1();
-		  total_aw += nbest_result.likelihoods[i].Value2();
-	  }
-	  gwws << " " << total_gw;
-	  awws << " " << total_aw;
-	  json_object_set_new(nbest_result_json_object, "gww", json_string(gwws.str().c_str()));
-	  json_object_set_new(nbest_result_json_object, "aww", json_string(awws.str().c_str()));
+	  //std::ostringstream gwws;
+	  //std::ostringstream awws;
+	  //for (int i = 0; i < nbest_result.likelihoods.size(); i++) {
+		//  if (i > 0) {
+		//	  gwws << " ";
+		//	  awws << " ";
+		//  }
+		//  gwws << nbest_result.likelihoods[i].Value1();
+		//  awws << nbest_result.likelihoods[i].Value2();
+	  //}
+	  std::vector<string> likelihoods = gst_kaldinnet2onlinedecoder_weights_to_string(nbest_result.likelihoods);
+	  json_object_set_new(nbest_result_json_object, "gww", json_string(likelihoods[0].c_str()));
+	  json_object_set_new(nbest_result_json_object, "aww", json_string(likelihoods[1].c_str()));
       json_array_append( nbest_json_arr, nbest_result_json_object );
       if (nbest_result.phone_alignment.size() > 0) {
         if (strcmp(filter->phone_syms_filename, "") == 0) {
